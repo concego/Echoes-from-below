@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Echoes From Below</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Região de narração principal para leitores de tela -->
+  <div id="aria-narrator" aria-live="assertive" aria-atomic="true" class="sr-only"></div>
+  <!-- Região de alertas polidos (menor prioridade) -->
+  <div id="aria-status" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+  <main id="game-container">
+
+    <!-- Tela: Menu principal -->
+    <section id="screen-menu" class="screen active" aria-label="Menu Principal">
+      <h1>Echoes From Below</h1>
+      <p>Um soldado acorda numa cripta. O Carrasco vaga pelos corredores.</p>
+      <nav aria-label="Opções do menu">
+        <button id="btn-new-game" autofocus>Nova Partida</button>
+        <button id="btn-continue" disabled>Continuar</button>
+        <button id="btn-options">Opções</button>
+      </nav>
+    </section>
+
+    <!-- Tela: Jogo -->
+    <section id="screen-game" class="screen" aria-label="Jogo" aria-hidden="true">
+
+      <!-- HUD acessível -->
+      <div id="hud" role="status" aria-label="Estado do personagem">
+        <span id="hud-keys">Chaves: <strong id="key-count">0</strong>/3</span>
+        <span id="hud-items">Itens: <strong id="item-count">0</strong></span>
+        <span id="hud-threat" aria-live="assertive"></span>
+      </div>
+
+      <!-- Grid do mapa (visual) -->
+      <div id="map-grid" role="grid" aria-label="Mapa da cripta" tabindex="-1"></div>
+
+      <!-- Descrição textual da célula atual (sempre visível para leitor de tela) -->
+      <div id="cell-description" role="region" aria-label="Localização atual" aria-live="polite">
+        Aguardando início...
+      </div>
+
+      <!-- Painel de pausa (inventário / puzzle / exame) -->
+      <div id="panel-overlay" class="panel hidden" role="dialog" aria-modal="true" aria-label="Painel" aria-hidden="true">
+        <div id="panel-content" tabindex="-1"></div>
+        <button id="panel-close">Fechar (Esc)</button>
+      </div>
+
+    </section>
+
+    <!-- Tela: Game Over -->
+    <section id="screen-gameover" class="screen" aria-label="Fim de Jogo" aria-hidden="true">
+      <h2>O Carrasco te encontrou.</h2>
+      <p id="gameover-msg"></p>
+      <button id="btn-restart">Tentar Novamente</button>
+      <button id="btn-menu-go">Voltar ao Menu</button>
+    </section>
+
+    <!-- Tela: Vitória -->
+    <section id="screen-victory" class="screen" aria-label="Vitória" aria-hidden="true">
+      <h2>Você escapou da cripta.</h2>
+      <p id="victory-msg"></p>
+      <button id="btn-play-again">Jogar Novamente</button>
+      <button id="btn-menu-win">Voltar ao Menu</button>
+    </section>
+
+  </main>
+
+  <!-- Legenda de teclas (sempre visível / acessível) -->
+  <footer id="controls-help" aria-label="Controles">
+    <details>
+      <summary>Controles</summary>
+      <ul>
+        <li><kbd>Setas</kbd> / <kbd>WASD</kbd> — Mover</li>
+        <li><kbd>Enter</kbd> / <kbd>Espaço</kbd> — Interagir</li>
+        <li><kbd>I</kbd> — Inventário</li>
+        <li><kbd>M</kbd> — Mapa textual</li>
+        <li><kbd>S</kbd> — Status (onde estou)</li>
+        <li><kbd>Esc</kbd> — Pausar / Fechar painel</li>
+      </ul>
+    </details>
+  </footer>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
